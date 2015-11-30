@@ -1,3 +1,3 @@
-json.actor do
-  json.extract! @actor, :email, :auth_token
+json.user do
+  json.extract! @user, :email, :auth_token
 end

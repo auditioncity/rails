@@ -1,6 +1,6 @@
-json.actor do
-  json.full_name @actor.full_name
-  json.email @actor.email
-  json.auth_token @actor.auth_token
+json.user do
+  json.full_name @user.full_name
+  json.email @user.email
+  json.auth_token @user.auth_token
 
 end
