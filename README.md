@@ -58,7 +58,7 @@ User can login.
 | Parameter        | Type           | Description  |
 | ------------- |:-------------:|:----- |
 | full_name | String | *(Required)* users full name | 
-|email	|string|(Required) users email adrress
+|email	|string|(Required) users email adrress|
 | password | String | *(Required)* User's password | 
 
 **Response**
