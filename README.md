@@ -2,7 +2,7 @@
 
 ## User Methods
 
-### Signup/Registration
+###Registration
 
 Register as a user to allow for creating new entries on the site.
 
@@ -85,64 +85,48 @@ If unsuccessful, you will receive:
 ```
 ```
 ```
-###Anything below from this point is old leftovers and not good for anything but confusion.  I'll do more tommorrow Tuesday.
-------------------------------
 
 
 
+#### Delete a user
 
+**Route** delete "/signup", to: "registrations#destroy"
 
+**Method** DELETE
 
-
-
-
-
-
-
-
-
-
-
-## Images
-
-### Upload a new image
-
-Authenticated users can create images. 
-
-**Route** "journeys/:journey_id/images"
-
-**Method** POST
-
-***REQUIRED IN HEADERS*** : Access-Token = string
+***REQUIRED IN HEADERS*** : Password = string
 
 **Request**
 
 | Parameter        | Type           | Description  |
 | ------------- |:-------------:|:----- |
-| journey_id | Integer | *(Required)* | 
-| photo | file |.jpg .jpeg etc|
-|description|t.string|Photo description			|
+| email | string | *(Required)* | 
+		
 
 **Response**
 
 If successful, you will receive:
-
-	Status Code: 201 - Created
+{
+  "success": "User deleted"
+}
 	
-```
-	{ "image": 
-			{ "id": 2
-				"journey_id": 1,
-			  "photo_file_name": "terrific.jpeg",
-			  "description": "my awesome trip"
-			}
-	}			
-```
+
 
 If unsuccessful, you will receive:
 
 	Status Code: 404 - Unprocessable Entity
+	
+{
+  "errors": [
+    "Email is invalid"
+  ]
+}
 
+
+
+
+
+##Anything below from this point is old leftovers and not good for anything but confusion.  I'll do more tommorrow Tuesday.
 ### Get an index of images
 
 **Route** /"journeys/:journey_id/images"
