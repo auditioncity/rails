@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   has_secure_password
 
+  has_many :actors
+
   before_validation :ensure_access_token!
 
   validates_presence_of :email
