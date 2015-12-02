@@ -58,33 +58,23 @@ User can login.
 | Parameter        | Type           | Description  |
 | ------------- |:-------------:|:----- |
 | full_name | String | *(Required)* users full name | 
-| email	| string | (Required) users email adrress |
+| email | string | (Required) users email adrress |
 | password | String | *(Required)* User's password | 
 
 **Response**
 
 If successful, you will receive:
 
-	Status Code: 202 - Accepted
-	
-```
-{
-  "user": {
-    "email": "joe@joeventures.com",
-    "auth_token": "02d5f2fc2affa9740a603af11fae54c1"
-  }
-}			
-```
+    Status Code: 202 - Accepted
+
+{ "user": { "email": "joe@joeventures.com", "auth_token": "02d5f2fc2affa9740a603af11fae54c1" } }
+
 
 If unsuccessful, you will receive:
 
 {
   "error": "Could not find user for joe@joeventures.com or wrong password."
 }
-```
-```
-```
-
 
 
 #### Delete a user
