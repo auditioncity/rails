@@ -14,6 +14,10 @@ class ActorsController < ApplicationController
     #todo
   end
 
+  def list
+    #todo
+  end
+
   def delete
     #todo
   end
