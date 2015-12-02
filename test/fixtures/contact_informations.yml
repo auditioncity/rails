@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  contactable_type: MyString
+  contactable_id: 1
+  type: 
+  label: MyString
+  info: MyString
+
+two:
+  contactable_type: MyString
+  contactable_id: 1
+  type: 
+  label: MyString
+  info: MyString
