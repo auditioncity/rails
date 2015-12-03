@@ -56,7 +56,13 @@ class ActorsController < ApplicationController
   end
 
   def show
-    #todo
+    @actor = Actor.find(params[:id])
+    if @actor
+      render "show.json.jbuilder", status: :ok
+    else
+      render json: {errors: @actor.errors.full_messages},
+             status: :unprocessable_entity
+    end
   end
 
   def index
@@ -64,6 +70,11 @@ class ActorsController < ApplicationController
   end
 
   def destroy
-
+    if Actor.find(params[:id]).destroy
+      render json: {success: "Actor Profile Deleted"}, status: :ok
+    else
+      render json: {error: "That Actor Profile does not exist."},
+             status: :not_found
+    end
   end
 end
