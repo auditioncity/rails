@@ -34,18 +34,36 @@ class ActorsController < ApplicationController
   end
 
   def update
-    #todo
+    @actor = Actor.find(params[:id])
+    @actor.update(bio: params[:bio],
+                  age_young: params[:age_young],
+                  age_old: params[:age_old],
+                  height_feet: params[:height_feet],
+                  height_inches: params[:height_inches],
+                  hair_color: params[:hair_color],
+                  eye_color: params[:eye_color],
+                  skills: params[:skills],
+                  gender: params[:gender],
+                  ethnicity: params[:ethnicity],
+                  talent_agency: params[:talent_agency],
+                  union: params[:union])
+    if @actor.save
+      render "update.json.jbuilder", status: :ok
+    else
+      render json: { errors: @actor.errors.full_messages },
+             status: :unprocessable_entity
+    end
   end
 
   def show
     #todo
   end
 
-  def list
+  def index
     #todo
   end
 
-  def delete
-    #todo
+  def destroy
+
   end
 end
