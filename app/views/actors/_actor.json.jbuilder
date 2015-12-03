@@ -1,11 +1,12 @@
 json.actor do
   json.id actor.id
-  json.full_name actor.full_name
-  json.phone actor.phone
-  json.email actor.email
-  json.website_url actor.website_url
+  json.full_name actor.user.full_name
+  #json.phone actor.phone
+  #json.email actor.email
+  #json.website_url actor.website_url
   json.bio actor.bio
-  json.age actor.age
+  json.age_young actor.age_young
+  json.age_old actor.age_old
   json.height_feet actor.height_feet
   json.height_inches actor.height_inches
   json.hair_color actor.hair_color

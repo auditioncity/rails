@@ -11,10 +11,50 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151130202807) do
+ActiveRecord::Schema.define(version: 20151202152322) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "actors", force: :cascade do |t|
+    t.integer  "user_id",       null: false
+    t.text     "bio"
+    t.integer  "age_young"
+    t.integer  "age_old"
+    t.integer  "height_feet"
+    t.integer  "height_inches"
+    t.string   "hair_color"
+    t.string   "eye_color"
+    t.string   "skills"
+    t.string   "gender"
+    t.string   "ethnicity"
+    t.string   "talent_agency"
+    t.string   "union"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "addresses", force: :cascade do |t|
+    t.string   "addressable_type"
+    t.integer  "addressable_id"
+    t.string   "address1"
+    t.string   "address2"
+    t.string   "city"
+    t.string   "state"
+    t.string   "zip"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  create_table "contact_informations", force: :cascade do |t|
+    t.string   "contactable_type"
+    t.integer  "contactable_id"
+    t.string   "type"
+    t.string   "label"
+    t.string   "info"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "full_name"
