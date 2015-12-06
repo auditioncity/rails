@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151202152322) do
+ActiveRecord::Schema.define(version: 20151204193955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "actors", force: :cascade do |t|
-    t.integer  "user_id",       null: false
+    t.integer  "user_id",               null: false
     t.text     "bio"
     t.integer  "age_young"
     t.integer  "age_old"
@@ -30,8 +30,16 @@ ActiveRecord::Schema.define(version: 20151202152322) do
     t.string   "ethnicity"
     t.string   "talent_agency"
     t.string   "union"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.string   "headshot_file_name"
+    t.string   "headshot_content_type"
+    t.integer  "headshot_file_size"
+    t.datetime "headshot_updated_at"
+    t.string   "resume_file_name"
+    t.string   "resume_content_type"
+    t.integer  "resume_file_size"
+    t.datetime "resume_updated_at"
   end
 
   create_table "addresses", force: :cascade do |t|

@@ -14,3 +14,5 @@
 
 # Ignore RubyMine Files
 .idea
+
+.env
