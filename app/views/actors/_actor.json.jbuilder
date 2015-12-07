@@ -15,5 +15,10 @@ json.actor do
   json.gender actor.gender
   json.ethnicity actor.ethnicity
   json.talent_agency actor.talent_agency
-  json.union actor.union  
+  json.union actor.union
+  json.headshot_full actor.headshot.url(:full)
+  json.headshot_large actor.headshot.url(:large)
+  json.headshot_mobile actor.headshot.url(:mobile)
+  json.headshot_small actor.headshot.url(:small)
+  json.headshot_thumb actor.headshot.url(:thumb)
 end

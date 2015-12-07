@@ -15,7 +15,9 @@ class ActorsController < ApplicationController
                              gender: params[:gender],
                              ethnicity: params[:ethnicity],
                              talent_agency: params[:talent_agency],
-                             union: params[:union])
+                             union: params[:union],
+                             headshot: params[:headshot],
+                             resume: params[:resume])
     @actor.addresses.new(address1: params[:address1],
                          address2: params[:address2],
                          city: params[:city],
@@ -24,6 +26,7 @@ class ActorsController < ApplicationController
     @actor.emails.new(label: params[:email_type], info: params[:email])
     @actor.phone_numbers.new( label: params[:phone_type], info: params[:phone_number])
     @actor.websites.new( label: params[:website_type], info: params[:website_url])
+    #binding.pry
 
     if @actor.save
       render "show.json.jbuilder", status: :created
@@ -66,7 +69,13 @@ class ActorsController < ApplicationController
   end
 
   def index
-    #todo
+    @actor = Actor.all
+    if @actor
+      render "index.json.jbuilder"
+    else
+      render json: {errors: @actor.errors.full_messages},
+             status: :unprocessable_entity
+    end
   end
 
   def destroy
