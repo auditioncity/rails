@@ -16,8 +16,8 @@ class ActorsController < ApplicationController
                              ethnicity: params["info.ethnicity"],
                              talent_agency: params["info.talent_agency"],
                              union: params["info.union"],
-                             headshot: params["info.headshot"],
-                             resume: params["info.resume"])
+                             headshot: params[:headshot],
+                             resume: params[:resume])
     @actor.addresses.new(address1: params["info.address1"],
                          address2: params["info.address2"],
                          city: params["info.city"],
