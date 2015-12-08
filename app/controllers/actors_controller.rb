@@ -88,11 +88,11 @@ class ActorsController < ApplicationController
   end
 
   private
-  def info_params
-    params.permit(:info, :bio, :age_young, :age_old, :height_feet, :height_inches,
-                                  :hair_color, :eye_color, :skills, :gender, :ethnicity,
-                                  :talent_agency, :union, :address1, :address2, :city,
-                                  :state, :zip, :email, :phone_number, :website_url,
-                                  :email_type, :phone_type, :website_type, :headshot, :resume)
-  end
+  # def info_params
+  #   params.permit(:info, :bio, :age_young, :age_old, :height_feet, :height_inches,
+  #                                 :hair_color, :eye_color, :skills, :gender, :ethnicity,
+  #                                 :talent_agency, :union, :address1, :address2, :city,
+  #                                 :state, :zip, :email, :phone_number, :website_url,
+  #                                 :email_type, :phone_type, :website_type, :headshot, :resume)
+  # end
 end
