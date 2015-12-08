@@ -7,6 +7,7 @@ class ActorsController < ApplicationController
     #binding.pry
     if params[:info]
       @info = JSON.parse(params[:info])
+      @info.symbolize_keys!
       @actor = user.actors.new(
           bio: @info[:bio],
           age_young: @info[:age_young],
