@@ -24,9 +24,9 @@ class ActorsController < ApplicationController
                          city: params[:info][:city],
                          state: params[:info][:state],
                          zip: params[:info][:zip])
-    @actor.emails.new(label: params["info.email_type"], info: params["info.email"])
-    @actor.phone_numbers.new( label: params["info.phone_type"], info: params["info.phone_number"])
-    @actor.websites.new( label: params["info.website_type"], info: params["info.website_url"])
+    # @actor.emails.new(label: params["info.email_type"], info: params["info.email"])
+    # @actor.phone_numbers.new( label: params["info.phone_type"], info: params["info.phone_number"])
+    # @actor.websites.new( label: params["info.website_type"], info: params["info.website_url"])
 
     if @actor.save
       render "show.json.jbuilder", status: :created
@@ -87,7 +87,7 @@ class ActorsController < ApplicationController
     end
   end
 
-  private
+  # private
   # def info_params
   #   params.permit(:info, :bio, :age_young, :age_old, :height_feet, :height_inches,
   #                                 :hair_color, :eye_color, :skills, :gender, :ethnicity,
