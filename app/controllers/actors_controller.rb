@@ -5,29 +5,32 @@ class ActorsController < ApplicationController
   def create
     user = current_user
     #binding.pry
-    @actor = user.actors.new(
-        bio: params[:info][:bio],
-        age_young: params[:info][:age_young],
-        age_old: params[:info][:age_old],
-        height_feet: params[:info][:height_feet],
-        height_inches: params[:info][:height_inches],
-        hair_color: params[:info][:hair_color],
-        eye_color: params[:info][:eye_color],
-        skills: params[:info][:skills],
-        gender: params[:info][:gender],
-        ethnicity: params[:info][:ethnicity],
-        talent_agency: params[:info][:talent_agency],
-        union: params[:info][:union],
-        headshot: params[:headshot],
-        resume: params[:resume])
-    @actor.addresses.new(address1: params[:info][:address1],
-                         address2: params[:info][:address2],
-                         city: params[:info][:city],
-                         state: params[:info][:state],
-                         zip: params[:info][:zip])
-    @actor.emails.new(label: params[:info][:email_type], info: params[:info][:email])
-    @actor.phone_numbers.new( label: params[:info][:phone_type], info: params[:info][:phone_number])
-    @actor.websites.new( label: params[:info][:website_type], info: params[:info][:website_url])
+    if params[:info]
+      @info = JSON.parse(params[:info])
+      @actor = user.actors.new(
+          bio: @info[:bio],
+          age_young: @info[:age_young],
+          age_old: @info[:age_old],
+          height_feet: @info[:height_feet],
+          height_inches: @info[:height_inches],
+          hair_color: @info[:hair_color],
+          eye_color: @info[:eye_color],
+          skills: @info[:skills],
+          gender: @info[:gender],
+          ethnicity: @info[:ethnicity],
+          talent_agency: @info[:talent_agency],
+          union: @info[:union],
+          headshot: params[:headshot],
+          resume: params[:resume])
+      @actor.addresses.new(address1: @info[:address1],
+                           address2: @info[:address2],
+                           city: @info[:city],
+                           state: @info[:state],
+                           zip: @info[:zip])
+      @actor.emails.new(label: @info[:email_type], info: @info[:email])
+      @actor.phone_numbers.new( label: @info[:phone_type], info: @info[:phone_number])
+      @actor.websites.new( label: @info[:website_type], info: @info[:website_url])
+    end
 
     if @actor.save
       render "show.json.jbuilder", status: :created
