@@ -21,4 +21,5 @@ json.actor do
   json.headshot_mobile actor.headshot.url(:mobile)
   json.headshot_small actor.headshot.url(:small)
   json.headshot_thumb actor.headshot.url(:thumb)
+  json.resume actor.resume.url
 end
