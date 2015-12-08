@@ -5,28 +5,29 @@ class ActorsController < ApplicationController
   def create
     user = current_user
     #binding.pry
-    @actor = user.actors.new(bio: params[:info][:bio],
-                             age_young: params[:info][:age_young],
-                             age_old: params[:info][:age_old],
-                             height_feet: params[:info][:height_feet],
-                             height_inches: params[:info][:height_inches],
-                             hair_color: params[:info][:hair_color],
-                             eye_color: params[:info][:eye_color],
-                             skills: params[:info][:skills],
-                             gender: params[:info][:gender],
-                             ethnicity: params[:info][:ethnicity],
-                             talent_agency: params[:info][:talent_agency],
-                             union: params[:info][:union],
-                             headshot: params[:headshot],
-                             resume: params[:resume])
+    @actor = user.actors.new(
+        bio: params[:info][:bio],
+        age_young: params[:info][:age_young],
+        age_old: params[:info][:age_old],
+        height_feet: params[:info][:height_feet],
+        height_inches: params[:info][:height_inches],
+        hair_color: params[:info][:hair_color],
+        eye_color: params[:info][:eye_color],
+        skills: params[:info][:skills],
+        gender: params[:info][:gender],
+        ethnicity: params[:info][:ethnicity],
+        talent_agency: params[:info][:talent_agency],
+        union: params[:info][:union],
+        headshot: params[:headshot],
+        resume: params[:resume])
     @actor.addresses.new(address1: params[:info][:address1],
                          address2: params[:info][:address2],
                          city: params[:info][:city],
                          state: params[:info][:state],
                          zip: params[:info][:zip])
-    # @actor.emails.new(label: params["info.email_type"], info: params["info.email"])
-    # @actor.phone_numbers.new( label: params["info.phone_type"], info: params["info.phone_number"])
-    # @actor.websites.new( label: params["info.website_type"], info: params["info.website_url"])
+    @actor.emails.new(label: params[:info][:email_type], info: params[:info][:email])
+    @actor.phone_numbers.new( label: params[:info][:phone_type], info: params[:info][:phone_number])
+    @actor.websites.new( label: params[:info][:website_type], info: params[:info][:website_url])
 
     if @actor.save
       render "show.json.jbuilder", status: :created
@@ -87,12 +88,13 @@ class ActorsController < ApplicationController
     end
   end
 
-  # private
+  #private
   # def info_params
-  #   params.permit(:info, :bio, :age_young, :age_old, :height_feet, :height_inches,
-  #                                 :hair_color, :eye_color, :skills, :gender, :ethnicity,
-  #                                 :talent_agency, :union, :address1, :address2, :city,
-  #                                 :state, :zip, :email, :phone_number, :website_url,
-  #                                 :email_type, :phone_type, :website_type, :headshot, :resume)
+  #   params.require(:info).permit({info:
+  #       [:bio, :age_young, :age_old, :height_feet, :height_inches,
+  #        :hair_color, :eye_color, :skills, :gender, :ethnicity,
+  #        :talent_agency, :union, :address1, :address2, :city,
+  #        :state, :zip, :email, :phone_number, :website_url,
+  #        :email_type, :phone_type, :website_type]}, :headshot, :resume)
   # end
 end
