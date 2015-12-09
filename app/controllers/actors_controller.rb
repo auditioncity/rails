@@ -6,6 +6,8 @@ class ActorsController < ApplicationController
     user = current_user
     #binding.pry
     if params[:info]
+      headshot = params[:headshot] unless params[:headshot] == "undefined"
+      resume = params[:resume] unless params[:resume] == "undefined"
       @info = JSON.parse(params[:info])
       @info.symbolize_keys!
       @actor = user.actors.new(
@@ -21,8 +23,8 @@ class ActorsController < ApplicationController
           ethnicity: @info[:ethnicity],
           talent_agency: @info[:talent_agency],
           union: @info[:union],
-          headshot: params[:headshot],
-          resume: params[:resume])
+          headshot: headshot,
+          resume: resume)
       @actor.addresses.new(address1: @info[:address1],
                            address2: @info[:address2],
                            city: @info[:city],
@@ -92,13 +94,4 @@ class ActorsController < ApplicationController
     end
   end
 
-  #private
-  # def info_params
-  #   params.require(:info).permit({info:
-  #       [:bio, :age_young, :age_old, :height_feet, :height_inches,
-  #        :hair_color, :eye_color, :skills, :gender, :ethnicity,
-  #        :talent_agency, :union, :address1, :address2, :city,
-  #        :state, :zip, :email, :phone_number, :website_url,
-  #        :email_type, :phone_type, :website_type]}, :headshot, :resume)
-  # end
 end
