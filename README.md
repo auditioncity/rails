@@ -148,14 +148,21 @@ These methods are used to manage the basic details of Actor profiles. Contact de
 
 ### <a name="actor-new"></a>New Profile
 
+This is an endpoint to add Actor profiles for a specific User. This is a Multipart Encoded POST request because it may include the headshot and resume.
+
 **Route** /actors/new
 
 **Method** POST
 
 **Request**
 
+The Headshot must be of type `image/jpeg` and passed in a form object called `headshot`. The Resumé must be of type `application/pdf` and passed in a form object called `resume`.
+
+The JSON data should be passed in a form object called `info`, with the following parameters:
+
 | Parameter        | Type           | Description  |
 | ------------- |:-------------:|:----- |
+| full_name | String | User's full name. This will change the User's full name across *all* profiles.
 | bio | String | Actor's biography
 | age_young | Integer | The age of the youngest role the actor is able to portray
 | age_old | Integer | The age of the oldest role the actor is able to portray
@@ -182,11 +189,25 @@ These methods are used to manage the basic details of Actor profiles. Contact de
 
 **Hair Colors**
 
-* TBD
+* Blonde
+* Brown
+* Hazel
+* Grey
+* Black
+* Red
+* White
+* Other
+* None
 
 **Eye Colors**
 
-* TBD
+* Blue
+* Brown
+* Hazel
+* Green
+* Black
+* Grey
+* Purple
 
 **Ethnicities**
 
@@ -196,6 +217,26 @@ These methods are used to manage the basic details of Actor profiles. Contact de
 * White or Caucasian
 * American Indian/Alaskan Native
 * Other
+
+**Sample Request**
+
+```
+------WebKitFormBoundaryLDO5L5uBiaTrJSgj
+Content-Disposition: form-data; name="headshot"; filename="Iam-Actor-headshot-1.jpg"
+Content-Type: image/jpeg
+
+
+------WebKitFormBoundaryLDO5L5uBiaTrJSgj
+Content-Disposition: form-data; name="resume"; filename="Iam-Actor-resume.pdf"
+Content-Type: application/pdf
+
+
+------WebKitFormBoundaryLDO5L5uBiaTrJSgj
+Content-Disposition: form-data; name="info"
+
+{"name":"Iam Actor","address_1":"123 Main St","address_2":null,"city":"Atlanta","state":"GA","zip":"30303","phone_type":"Home","phone":"404-555-1234","email_type":"Work","email":"iam@actor.org","Website":"http://iamactor.org","bio":"Iam Actor was born singing.","age_young":25,"age_old":35,"height_feet":5,"height_inches":8,"hair_color":Brown,"eye_color":Blue,"gender":Male,"ethnicity":"White or Caucasian","talent_agency":"Actors R Us","union":["Equity"],"skills":["Acting Instructor","Director","Prop Artisan"]}
+------WebKitFormBoundaryLDO5L5uBiaTrJSgj--
+```
 
 **Response**
 
@@ -226,6 +267,10 @@ If successful, you will receive:
 
 ### <a name="actor-update"></a>Update Profile
 
+Updating an Actor profile includes many of the same parameters as creating a new profile. However, contact information (address, email, phone, website URL) is not included.
+
+The headshot and resume can be included in this request. Therefore, the structure of this request is the same as creating a new profile.
+
 **Route** /actors/:id
 
 **Method** PUT
@@ -234,6 +279,7 @@ If successful, you will receive:
 
 | Parameter        | Type           | Description  |
 | ------------- |:-------------:|:----- |
+| full_name | String | User's full name. This will change the User's full name across *all* profiles.
 | bio | String | Actor's biography
 | age_young | Integer | The age of the youngest role the actor is able to portray
 | age_old | Integer | The age of the oldest role the actor is able to portray
@@ -306,6 +352,50 @@ If successful, you will receive:
   }
 }
 ```
+
+### <a name="actor-list"></a>Show a List of Actor Profiles
+
+**Route** /actors
+
+**Method** GET
+
+**Response**
+
+If successful, you will receive:
+
+	Status Code: 200 - OK
+
+```json
+{
+  "actors": [
+    {
+      "actor": {
+        "id": 1,
+        "full_name": "Johnny Actor",
+        "bio": "Johnny was a young boy with nothing much except a certain kind of look in his eye. He was discovered one day. You see, he had a certain kind of appeal for a certain kind of guy who gave him some advice on what to wear.",
+        "age_young": 25,
+        "age_old": 35,
+        "height_feet": 5,
+        "height_inches": 7,
+        "hair_color": "Brown",
+        "eye_color": "Brown",
+        "skills": "actor, singer",
+        "gender": "Male",
+        "ethnicity": "White or Caucasian",
+        "talent_agency": "Actors R Us",
+        "union": "Equity",
+        "headshot_full": "/headshots/full/missing.png",
+        "headshot_large": "/headshots/large/missing.png",
+        "headshot_mobile": "/headshots/mobile/missing.png",
+        "headshot_small": "/headshots/small/missing.png",
+        "headshot_thumb": "/headshots/thumb/missing.png",
+        "resume": "/resumes/original/missing.png"
+      }
+    }
+  ]
+}
+```
+
 
 ### <a name="actor-destroy"></a>Delete Profile
 
