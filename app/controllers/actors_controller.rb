@@ -10,6 +10,7 @@ class ActorsController < ApplicationController
       resume = params[:resume] unless params[:resume] == "undefined"
       @info = JSON.parse(params[:info])
       @info.symbolize_keys!
+      user.update(full_name: @info[:full_name]) if @info[:full_name]
       @actor = user.actors.new(
           bio: @info[:bio],
           age_young: @info[:age_young],
@@ -44,24 +45,33 @@ class ActorsController < ApplicationController
   end
 
   def update
-    @actor = Actor.find(params[:id])
-    @actor.update(bio: params[:bio],
-                  age_young: params[:age_young],
-                  age_old: params[:age_old],
-                  height_feet: params[:height_feet],
-                  height_inches: params[:height_inches],
-                  hair_color: params[:hair_color],
-                  eye_color: params[:eye_color],
-                  skills: params[:skills],
-                  gender: params[:gender],
-                  ethnicity: params[:ethnicity],
-                  talent_agency: params[:talent_agency],
-                  union: params[:union])
-    if @actor.save
-      render "update.json.jbuilder", status: :ok
-    else
-      render json: { errors: @actor.errors.full_messages },
-             status: :unprocessable_entity
+    if params[:info]
+      headshot = params[:headshot] unless params[:headshot] == "undefined"
+      resume = params[:resume] unless params[:resume] == "undefined"
+      @info = JSON.parse(params[:info])
+      @info.symbolize_keys!
+      @actor = Actor.find(params[:id])
+      current_user.update(full_name: @info[:full_name]) if @info[:full_name]
+      @actor.bio = @info[:bio]
+      @actor.age_young = @info[:age_young]
+      @actor.age_old = @info[:age_old]
+      @actor.height_feet = @info[:height_feet]
+      @actor.height_inches = @info[:height_inches]
+      @actor.hair_color = @info[:hair_color]
+      @actor.eye_color = @info[:eye_color]
+      @actor.skills = @info[:skills]
+      @actor.gender = @info[:gender]
+      @actor.ethnicity = @info[:ethnicity]
+      @actor.talent_agency = @info[:talent_agency]
+      @actor.union = @info[:union]
+      @actor.headshot = headshot
+      @actor.resume = resume
+      if @actor.save
+        render "update.json.jbuilder", status: :ok
+      else
+        render json: {errors: @actor.errors.full_messages},
+               status: :unprocessable_entity
+      end
     end
   end
 
