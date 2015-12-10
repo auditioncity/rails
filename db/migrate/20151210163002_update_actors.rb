@@ -1,4 +1,4 @@
-class UpdateActorsAndAddressesForPrimaries < ActiveRecord::Migration
+class UpdateActors < ActiveRecord::Migration
   def change
     add_column :actors, :primary_address, :string
     add_column :actors, :primary_email, :string
