@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   delete "/actors/:id", to: "actors#destroy"
 
   # CONTACT INFO
-  post "actors/:actor_id/address", to: "actors#add_address"
+  post "/actors/:actor_id/address", to: "actors#add_address"
   put "/actors/:actor_id/address/:type", to: "actors#update_address"
   post "/actors/:actor_id/email", to: "actors#add_email"
   put "/actors/:actor_id/email/:type", to: "actors#update_email"
