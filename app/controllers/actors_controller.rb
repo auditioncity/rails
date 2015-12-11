@@ -195,7 +195,7 @@ class ActorsController < ApplicationController
 
   def add_phone
     actor = Actor.find(params[:actor_id])
-    actor.phone_numbers.new(label: params[:phone_type], info: params[:phone_number])
+    actor.phone_numbers.new(label: params[:type], info: params[:phone])
     if actor.save
       @phone = actor.phone_numbers.last
       render "phone.json.jbuilder", status: :created
