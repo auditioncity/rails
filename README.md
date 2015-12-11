@@ -11,6 +11,13 @@
   * [Show a Single Actor Profile](#actor-show)
   * [Show a List of Actor Profiles](#actor-list)
   * [Delete an Actor Profile](#actor-destroy)
+  * [Add an Actor Address](#actor-new-address)
+  * [Update an Actor Address](#actor-update-address)
+  * [Delete an Actor Address](#actor-delete-address)
+  * [Add Actor's Contact Information](#actor-new-contactable)
+  * [Update Actor's Contact Information](#actor-update-contactable)
+  * [Delete Actor's Contact Information](#actor-delete-contactable)
+  * [Set Actor's Primary Contact](#actor-set-primary)
 
 **Information**
 
@@ -415,3 +422,92 @@ If successful, you will receive:
 }
 ```
 
+### <a name="actor-new-address"></a>Add an Actor Address
+
+**Route** /actors/:id/address
+
+**Method** POST
+
+**Request**
+
+| Parameter        | Type           | Description  |
+| ------------- |:-------------:|:----- |
+| address_type | String | The Address type (Home, Work, etc.)
+| address1 | String | The first line of the address
+| address2 | String | The second line of the address
+| city | String | The city
+| state | String | The two-character state abbreviation
+| zip | String | The zip code
+
+### <a name="actor-update-address"></a>Update an Actor Address
+
+**Route** /actors/:id/address/:type
+
+**Method** PUT
+
+**Request**
+
+| Parameter        | Type           | Description  |
+| ------------- |:-------------:|:----- |
+| address_type | String | The Address type (Home, Work, etc.)
+| address1 | String | The first line of the address
+| address2 | String | The second line of the address
+| city | String | The city
+| state | String | The two-character state abbreviation
+| zip | String | The zip code
+
+### <a name="actor-delete-address"></a>Delete an Actor Address
+
+**Route** /actors/:id/address/:type
+
+**Method** DELETE
+
+That's it!
+
+### <a name="actor-new-contactable"></a>Add an Actor Email/Phone/Website URL
+
+**Route** /actors/:id/:medium
+
+For this Route, `:medium` should either be `email`, `phone`, or `url`
+
+**Method** POST
+
+**Request**
+
+| Parameter        | Type           | Description  |
+| ------------- |:-------------:|:----- |
+| type | String | The contact type (Home, Work, etc.)
+| email (if `:medium` is `email`) | String | The Actor's email address
+| phone (if `:medium` is `phone`) | String | The Actor's phone number
+| website_url (if `:medium` is `url`) | String | The URL for the Actor's website
+
+### <a name="actor-update-contactable"></a>Update an Actor's Contact Information
+
+**Route** /actors/:id/:medium
+
+For this Route, `:medium` should either be `email`, `phone`, or `url`
+
+**Method** PUT
+
+**Request**
+
+| Parameter        | Type           | Description  |
+| ------------- |:-------------:|:----- |
+| type | String | The contact type (Home, Work, etc.)
+| email (if `:medium` is `email`) | String | The Actor's email address
+| phone (if `:medium` is `phone`) | String | The Actor's phone number
+| website_url (if `:medium` is `url`) | String | The URL for the Actor's website
+
+### <a name="actor-set-primary"></a>Set Actor's Primary Contact
+
+**Route** /actors/:id/primary/:medium
+
+For this Route, `:medium` should either be `address`, `email`, `phone`, or `url`
+
+**Method** PUT
+
+**Request**
+
+| Parameter        | Type           | Description  |
+| ------------- |:-------------:|:----- |
+| primary | String | The name of the contact type (Home, Work, etc.)
