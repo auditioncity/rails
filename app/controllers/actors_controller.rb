@@ -4,7 +4,6 @@ class ActorsController < ApplicationController
 
   def create
     user = current_user
-    #binding.pry
     if params[:info]
       headshot = params[:headshot] unless params[:headshot] == "undefined"
       resume = params[:resume] unless params[:resume] == "undefined"
@@ -247,7 +246,7 @@ class ActorsController < ApplicationController
   def update_url
     @url = Website.where(contactable_type: 'Actor',
                          contactable_id: params[:actor_id],
-                         label: params[:type]).take
+                         label: params[:old_type]).take
     @url.label = params[:type] if params[:type]
     @url.info = params[:website_url] if params[:website_url]
     if @url.save
@@ -267,6 +266,17 @@ class ActorsController < ApplicationController
     else
       render json: {error: "That Website URL does not exist."},
              status: :not_found
+    end
+  end
+
+  def update_primary
+    fieldname = "primary_#{params[:contact_type]}".to_sym
+    @actor = Actor.find(params[:actor_id])
+    if @actor.update(fieldname.to_sym => params[:primary])
+      render "show.json.jbuilder"
+    else
+      render json: {errors: @actor.errors.full_messages},
+             status: :unprocessable_entity
     end
   end
 end
