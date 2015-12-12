@@ -1,17 +1,17 @@
 Rails.application.routes.draw do
-  # USER ROUTES
+  # USERS (Authentication)
   post "/signup", to: "registrations#create"
   delete "/signup", to: "registrations#destroy"
   post "/login", to: "registrations#login"
 
-  # ACTOR ROUTES
+  # ACTORS
   post "/actors/new", to: "actors#create"
   put "/actors/:id", to: "actors#update"
   get "/actors/:id", to: "actors#show"
   get "/actors", to: "actors#index"
   delete "/actors/:id", to: "actors#destroy"
 
-  # CONTACT INFO
+  # CONTACT INFO FOR ACTORS
   post "/actors/:actor_id/address", to: "actors#add_address"
   put "/actors/:actor_id/address/:old_type", to: "actors#update_address"
   delete "/actors/:actor_id/address/:type", to: "actors#delete_address"
@@ -30,5 +30,13 @@ Rails.application.routes.draw do
   delete "/actors/:actor_id/url/:type", to: "actors#delete_url"
 
   put "/actors/:actor_id/primary/:contact_type", to: "actors#update_primary"
+
+  # DIRECTORS
+
+  post "/directors/new", to: "directors#create"
+  put "/directors/:id", to: "directors#update"
+  get "/directors/:id", to: "directors#show"
+  get "/directors", to: "directors#index"
+  delete "/directors/:id", to: "directors#destroy"
 
 end

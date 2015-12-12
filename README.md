@@ -18,6 +18,12 @@
   * [Update Actor's Contact Information](#actor-update-contactable)
   * [Delete Actor's Contact Information](#actor-delete-contactable)
   * [Set Actor's Primary Contact](#actor-set-primary)
+* [Director Profile Methods](#director-methods)
+  * [New Profile](#director-new)
+  * [Update Profile](#director-update)
+  * [Show a Single Director Profile](#director-show)
+  * [Show a List of Director Profiles](#director-list)
+  * [Delete a Director Profile](#director-destroy)
 
 **Information**
 
@@ -151,7 +157,7 @@ If unsuccessful, you will receive:
 
 ## <a name="actor-methods"></a>Actor Methods
 
-These methods are used to manage the basic details of Actor profiles. Contact details will be managed through a separate set of methods.
+These methods are used to manage the basic details of Actor profiles.
 
 ### <a name="actor-new"></a>New Profile
 
@@ -511,3 +517,220 @@ For this Route, `:medium` should either be `address`, `email`, `phone`, or `url`
 | Parameter        | Type           | Description  |
 | ------------- |:-------------:|:----- |
 | primary | String | The name of the contact type (Home, Work, etc.)
+
+## <a name="director-methods"></a>Director Methods
+
+These methods are used to manage the basic details of Director profiles.
+
+### <a name="director-new"></a>New Profile
+
+This is an endpoint to add Director profiles for a specific User.
+
+**Route** /directors/new
+
+**Method** POST
+
+**Request**
+
+| Parameter        | Type           | Description  |
+| ------------- |:-------------:|:----- |
+| full_name | String | User's full name. This will change the User's full name across *all* profiles.
+| company_name | String | The Director's company name
+| address1 | String | The first line of the director's primary address.
+| address2 | String | The second line of the director's primary address.
+| city | String | The city of the director's primary address.
+| state | String | The two-character state abbreviation of the director's primary address.
+| zip | String | The zip or postal code of the director's primary address.
+| email_type | String | The director's priamry email type ("Home", "Work", etc.)
+| email | String | The director's primary email address
+| phone_type | String | The director's primary phone number type ("Home", "Cell Phone", etc.)
+| phone_number | String | The director's primary phone number.
+| website_type | String | The director's primary website label or title.
+| website_url | String | The URL of the director's primary website.
+
+**Response**
+
+If successful, you will receive:
+
+	Status Code: 201 - Created
+
+```json
+{
+  "director": {
+    "id": 1,
+    "full_name": "Johnny Director",
+    "company_name": "Amazing Productions",
+    "addresses": [
+      {
+        "type": "Home",
+        "address1": "123 Main St",
+        "address2": "Suite 456",
+        "city": "Atlanta",
+        "state": "GA",
+        "zip": "30303"
+      }
+    ],
+    "emails": [
+      {
+        "type": "Home",
+        "email": "amazing@director.com"
+      }
+    ],
+    "phones": [
+      {
+        "type": "Home",
+        "phone": "404-404-40404"
+      }
+    ],
+    "urls": [
+      {
+        "type": "Personal",
+        "url": "http://director.com"
+      }
+    ]
+  }
+}
+```
+
+### <a name="director-update"></a>Update Profile
+
+Updating a Director profile includes many of the same parameters as creating a new profile. However, contact information (address, email, phone, website URL) is not included.
+
+**Route** /directors/:id
+
+**Method** PUT
+
+**Request**
+
+| Parameter        | Type           | Description  |
+| ------------- |:-------------:|:----- |
+| full_name | String | User's full name. This will change the User's full name across *all* profiles.
+| company_name | String | The Director's company name
+
+### <a name="director-show"></a>Show a Director's Profile
+
+**Route** /directors/:id
+
+**Method** GET
+
+### <a name="actor-show"></a>Show Profile
+
+**Route** /actors/:id
+
+**Method** GET
+
+**Response**
+
+If successful, you will receive:
+
+	Status Code: 200 - OK
+
+```json
+{
+  "director": {
+    "id": 1,
+    "full_name": "Johnny Director",
+    "company_name": "Amazing Productions",
+    "addresses": [
+      {
+        "type": "Home",
+        "address1": "123 Main St",
+        "address2": "Suite 456",
+        "city": "Atlanta",
+        "state": "GA",
+        "zip": "30303"
+      }
+    ],
+    "emails": [
+      {
+        "type": "Home",
+        "email": "amazing@director.com"
+      }
+    ],
+    "phones": [
+      {
+        "type": "Home",
+        "phone": "404-404-40404"
+      }
+    ],
+    "urls": [
+      {
+        "type": "Personal",
+        "url": "http://director.com"
+      }
+    ]
+  }
+}
+```
+
+### <a name="director-list"></a>Show All Director Profiles
+
+**Route** /directors
+
+**Method** GET
+
+**Response**
+
+If successful, you will receive:
+
+	Status Code: 200 - OK
+
+```json
+{
+"directors": [
+  {
+      "director": {
+        "id": 1,
+        "full_name": "Johnny Director",
+        "company_name": "Amazing Productions",
+        "addresses": [
+          {
+            "type": "Home",
+            "address1": "123 Main St",
+            "address2": "Suite 456",
+            "city": "Atlanta",
+            "state": "GA",
+            "zip": "30303"
+          }
+        ],
+        "emails": [
+          {
+            "type": "Home",
+            "email": "amazing@director.com"
+          }
+        ],
+        "phones": [
+          {
+            "type": "Home",
+            "phone": "404-404-40404"
+          }
+        ],
+        "urls": [
+          {
+            "type": "Personal",
+            "url": "http://director.com"
+          }
+        ]
+      }
+    }
+  ]
+}
+```
+
+### <a name="director-list"></a>Delete a Director Profile
+
+**Route** /directors/:id
+
+**Method** DELETE
+
+**Response**
+
+If successful, you will receive:
+
+	Status Code: 200 - OK
+
+```json
+{
+  "success": "Director Profile Deleted"
+}
+```
