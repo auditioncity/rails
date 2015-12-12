@@ -35,8 +35,8 @@ Rails.application.routes.draw do
 
   post "/directors/new", to: "directors#create"
   put "/directors/:id", to: "directors#update"
-  get "/directors:id", to: "directors#show"
+  get "/directors/:id", to: "directors#show"
   get "/directors", to: "directors#index"
   delete "/directors/:id", to: "directors#destroy"
-  
+
 end
