@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
   has_secure_password
 
   has_many :actors, dependent: :destroy
+  has_many :directors, dependent: destroy
 
   before_validation :ensure_access_token!
 
