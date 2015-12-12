@@ -1,0 +1,1 @@
+json.partial! "director", director: @director
