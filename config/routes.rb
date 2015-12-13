@@ -41,10 +41,10 @@ Rails.application.routes.draw do
 
   # DECISIONS
 
-  post "/directors/:id/decisions/new", to: "decisions#create"
-  put "/directors/:id/decisions/:id", to: "decisions#update"
-  get "/directors/:id/decisions/:decision_id", to: "decisions#show"
-  get "/directors/:id/decisions", to: "decisions#index"
-  delete "/directors/:id/decisions/:decision_id", to: "decisions#destroy"
+  post "/decisions/new", to: "decisions#create"
+  put "/decisions/:id", to: "decisions#update"
+  get "/decisions/:id", to: "decisions#show"
+  get "/decisions", to: "decisions#index"
+  delete "/decisions/:id", to: "decisions#destroy"
 
 end
