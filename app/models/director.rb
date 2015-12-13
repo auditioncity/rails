@@ -1,5 +1,6 @@
 class Director < ActiveRecord::Base
   belongs_to :user
+  has_many :decisions
   has_many :addresses, as: :addressable, dependent: :destroy
   has_many :emails, as: :contactable, class_name: "Email", dependent: :destroy
   has_many :phone_numbers, as: :contactable, class_name: "PhoneNumber", dependent: :destroy

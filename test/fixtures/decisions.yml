@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  actor_id: 1
+  director_id: 1
+  notes: MyText
+  callback: false
+
+two:
+  actor_id: 1
+  director_id: 1
+  notes: MyText
+  callback: false
