@@ -39,4 +39,12 @@ Rails.application.routes.draw do
   get "/directors", to: "directors#index"
   delete "/directors/:id", to: "directors#destroy"
 
+  # DECISIONS
+
+  post "/directors/:id/decisions/new", to: "decisions#create"
+  put "/directors/:id/decisions/:id", to: "decisions#update"
+  get "/directors/:id/decisions/:decision_id", to: "decisions#show"
+  get "/directors/:id/decisions", to: "decisions#index"
+  delete "/directors/:id/decisions/:decision_id", to: "decisions#destroy"
+
 end
