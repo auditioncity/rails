@@ -37,7 +37,7 @@ class DecisionsController < ApplicationController
   end
 
   def index
-    @decision = Decision.find_by_director_id(current_user.director)
+    @decision = Decision.where(director_id: current_user.director)
     if @decision
       render "index.json.jbuilder"
     else
