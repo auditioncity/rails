@@ -90,7 +90,9 @@ class ActorsController < ApplicationController
   end
 
   def index
-    @actor = Actor.all
+    #@actor = Actor.all
+    #@actor = Actor.find_by(eye_color: params[:eye_color], hair_color: params[:hair_color])
+    @actor = find_actors(params)
     if @actor
       render "index.json.jbuilder"
     else
@@ -278,5 +280,23 @@ class ActorsController < ApplicationController
       render json: {errors: @actor.errors.full_messages},
              status: :unprocessable_entity
     end
+  end
+
+  private
+
+  def find_actors(params)
+    actors = Actor.all
+    actors = actors.where(hair_color: params[:hair_color]) if params[:hair_color]
+    actors = actors.where(eye_color: params[:eye_color]) if params[:eye_color]
+    actors = actors.where("bio LIKE ?", "%#{params[:bio]}%") if params[:bio]
+    actors = actors.where("age_young <= #{params[:age_young]}") if params[:age_young]
+    actors = actors.where("age_old >= #{params[:age_old]}") if params[:age_old]
+    #todo Turn skills into an array
+    actors = actors.where("skills LIKE ?", "%#{params[:skills]}") if params[:skills]
+    actors = actors.where(gender: params[:gender]) if params[:gender]
+    actors = actors.where(ethnicity: params[:ethnicity]) if params[:ethnicity]
+    #todo Turn union into an array
+    actors = actors.where("union LIKE ?", "%#{params[:union]}") if params[:union]
+    actors
   end
 end
