@@ -1,6 +1,7 @@
 json.decision do
   actor = decision.actor
   director = decision.director
+  json.id decision.id
   json.notes decision.notes
   json.callback decision.callback
   json.actor do

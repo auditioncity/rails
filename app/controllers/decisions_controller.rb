@@ -17,7 +17,7 @@ class DecisionsController < ApplicationController
   def update
     @decision = Decision.find(params[:id])
     @decision.notes = params[:notes]
-    @decision.callback = params[:callback] == "true" ? true : false
+    @decision.callback = params[:callback].downcase == "true" ? true : false
     if @decision.save
       render "update.json.jbuilder"
     else
