@@ -3,7 +3,7 @@ class DirectorsController < ApplicationController
 
   def create
     current_user.update(full_name: params[:full_name]) if params[:full_name]
-    @director = current_user.directors.new(
+    @director = current_user.build_director(
         company_name: params[:company_name],
         primary_address: params[:address_type],
         primary_email: params[:email_type],

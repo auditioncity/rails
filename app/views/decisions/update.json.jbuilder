@@ -1,0 +1,1 @@
+json.partial! "decision", decision: @decision
