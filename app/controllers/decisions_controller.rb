@@ -37,11 +37,11 @@ class DecisionsController < ApplicationController
   end
 
   def index
-    @decisions = Decision.find_by_director_id(current_user.director)
-    if @decisions
+    @decision = Decision.find_by_director_id(current_user.director)
+    if @decision
       render "index.json.jbuilder"
     else
-      render json: {errors: @decisions.errors.full_messages},
+      render json: {errors: @decision.errors.full_messages},
              status: :unprocessable_entity
     end
   end
