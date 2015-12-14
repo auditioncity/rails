@@ -24,6 +24,12 @@
   * [Show a Single Director Profile](#director-show)
   * [Show a List of Director Profiles](#director-list)
   * [Delete a Director Profile](#director-destroy)
+* [Decision Methods](#decision-methods)
+  * [New Decision](#decision-new)
+  * [Update Decision](#decision-update)
+  * [Show a Single Decision](#decision-show)
+  * [Show a List of Decisions](#decision-list)
+  * [Delete a Decision](#decision-destroy)
 
 **Information**
 
@@ -613,12 +619,6 @@ Updating a Director profile includes many of the same parameters as creating a n
 
 **Method** GET
 
-### <a name="actor-show"></a>Show Profile
-
-**Route** /actors/:id
-
-**Method** GET
-
 **Response**
 
 If successful, you will receive:
@@ -717,7 +717,7 @@ If successful, you will receive:
 }
 ```
 
-### <a name="director-list"></a>Delete a Director Profile
+### <a name="director-destroy"></a>Delete a Director Profile
 
 **Route** /directors/:id
 
@@ -732,5 +732,145 @@ If successful, you will receive:
 ```json
 {
   "success": "Director Profile Deleted"
+}
+```
+
+## <a name="decision-methods"><a>Decision Methods
+
+Decisions are made by directors. They can take notes on any actor and decide whether to mark an actor for a callback. **Note:** All decision calls assume the user is logged on as a Director. Therefore, the `Access-Token` in the header must be for a User who has a Director profile.
+
+### <a name="decision-new"></a>Create a New Decision
+
+**Route** /decisions/new
+
+**Method** POST
+
+**Request**
+
+| Parameter        | Type           | Description  |
+| ------------- |:-------------:|:----- |
+| actor_id | Integer | The ID number of the actor
+| notes | Text | The director's notes about the actor
+| callback | Boolean | A flag the director can turn on or off for any actor (false by default)
+
+For the Boolean field, pass the word "true" or "false".
+
+**Response**
+
+If successful, you will receive:
+
+	Status Code: 201 - Created
+
+```json
+{
+  "decision": {
+    "notes": "These are some notes",
+    "callback": true,
+    "actor": {
+      "id": 1,
+      "full_name": "Johnny Actor"
+    },
+    "director": {
+      "id": 2,
+      "full_name": "Awesome Director"
+    }
+  }
+}
+```
+
+### <a name="decision-update"></a>Update a Decision
+
+**Route** /decisions/:id
+
+**Method** PUT
+
+**Request**
+
+| Parameter        | Type           | Description  |
+| ------------- |:-------------:|:----- |
+| actor_id | Integer | The ID number of the actor
+| notes | Text | The director's notes about the actor
+| callback | Boolean | A flag the director can turn on or off for any actor
+
+### <a name="decision-show"></a>Show a Decision
+
+**Route** /decisions/:id
+
+**Method** GET
+
+**Response**
+
+If successful, you will receive:
+
+	Status Code: 200 - OK
+
+```json
+{
+  "decision": {
+    "notes": "These are some notes",
+    "callback": true,
+    "actor": {
+      "id": 1,
+      "full_name": "Johnny Actor"
+    },
+    "director": {
+      "id": 2,
+      "full_name": "Awesome Director"
+    }
+  }
+}
+```
+
+### <a name="decision-list"></a>Show a List of Decisions
+
+This will show a list of decisions **only** for the currently logged-in Director.
+
+**Route** /decisions
+
+**Method** GET
+
+**Response**
+
+If successful, you will receive:
+
+	Status Code: 200 - OK
+
+```json
+{
+  "decisions": [
+    {
+      "decision": {
+        "id": 1,
+        "notes": "Some notes",
+        "callback": false,
+        "actor": {
+          "id": 1,
+          "full_name": "Test Console"
+        },
+        "director": {
+          "id": 2,
+          "full_name": "Another User"
+        }
+      }
+    }
+  ]
+}
+```
+
+### <a name="decision-destroy"></a>Delete a Director Profile
+
+**Route** /decisions/:id
+
+**Method** DELETE
+
+**Response**
+
+If successful, you will receive:
+
+	Status Code: 200 - OK
+
+```json
+{
+  "success": "Decision Deleted"
 }
 ```
