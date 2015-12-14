@@ -378,6 +378,22 @@ If successful, you will receive:
 
 **Method** GET
 
+**Parameters**
+
+The following search parameters can be used. Each additional search parameter will narrow the search results. If no parameters are used, all actor records will be returned.
+
+| Parameter        | Type           | Description  |
+| ------------- |:-------------:|:----- |
+| bio | String | Search for a word or phrase included in the bio
+| age_young | Integer | This will return actors will an age_young less than the search parameter.
+| age_old | Integer | This will return actors with an age_old greater than the search parameter.
+| hair_color | String | The actor's hair color. See defined list, under the New Profile method.
+| eye_color | String | The actor's eye color. See defined list, under the New Profile method.
+| skills | String | For now, you can only search for one skill at a time.
+| gender | String | Male or Female
+| ethnicity | String | The actor's ethnicity. See defined list, under the New Profile method.
+| union | String | The actor's union membership. For now, you can only search for one union at a time.
+
 **Response**
 
 If successful, you will receive:
