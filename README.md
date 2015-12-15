@@ -845,6 +845,15 @@ This will show a list of decisions **only** for the currently logged-in Director
 
 **Method** GET
 
+**Parameters**
+
+The following search parameters can be used. Each additional search parameter will narrow the search results. If no parameters are used, all decision records for the Director will be returned.
+
+| Parameter        | Type           | Description  |
+| ------------- |:-------------:|:----- |
+| callback | Empty | Only the callback key is needed. This parameter will return decisions marked for callback.
+| notes | String | Search for a word or phrase included in the notes. **Caution:** The search string is case sensitive.
+
 **Response**
 
 If successful, you will receive:
