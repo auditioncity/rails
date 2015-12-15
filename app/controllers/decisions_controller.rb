@@ -2,9 +2,10 @@ class DecisionsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    return update if decision_exists?
-    @decision = current_user.director.decisions.new
-    @decision.actor_id = params[:actor_id]
+    #@decision = current_user.director.decisions.new
+    #@decision.actor_id = params[:actor_id]
+    @decision = Decision.find_or_initialize_by(director_id: current_user.director.id,
+                                               actor_id: params[:actor_id])
     @decision.notes = params[:notes]
     @decision.callback = params[:callback] == "true" || params[:callback] == true ? true : false
     if @decision.save
@@ -16,7 +17,7 @@ class DecisionsController < ApplicationController
   end
 
   def update
-    @decision = Decision.find(params[:actor_id])
+    @decision = Decision.find(params[:id])
     @decision.notes = params[:notes]
     @decision.callback = params[:callback] == "true" || params[:callback] == true ? true : false
     if @decision.save
@@ -68,7 +69,7 @@ class DecisionsController < ApplicationController
   def decision_exists?
     #decisions = Decision.where(director_id: current_user.director)
     #decisions = decisions.where(actor_id: params[:actor_id])
-    Decision.exists?(director_id: current_user.director, actor_id: params[:actor_id])
+    Decision.exists?(director_id: current_user.director.id, actor_id: params[:actor_id])
   end
 
 end

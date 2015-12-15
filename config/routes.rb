@@ -42,7 +42,7 @@ Rails.application.routes.draw do
   # DECISIONS
 
   post "/decisions/new", to: "decisions#create"
-  put "/decisions/:actor_id", to: "decisions#update"
+  put "/decisions/:id", to: "decisions#update"
   get "/decisions/:id", to: "decisions#show"
   get "/decisions", to: "decisions#index"
   delete "/decisions/:id", to: "decisions#destroy"
