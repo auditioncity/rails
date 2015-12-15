@@ -37,7 +37,7 @@ class DecisionsController < ApplicationController
   end
 
   def index
-    @decision = Decision.where(director_id: current_user.director)
+    @decision = find_decisions
     if @decision
       render "index.json.jbuilder"
     else
@@ -53,6 +53,15 @@ class DecisionsController < ApplicationController
       render json: {error: "That Decision does not exist."},
              status: :not_found
     end
+  end
+
+  private
+
+  def find_decisions
+    decisions = Decision.where(director_id: current_user.director)
+    decisions = decisions.where(callback: true) if params[:callback]
+    decisions = decisions.where("notes LIKE ?", "%#{params[:notes]}%") if params[:notes]
+    decisions
   end
 
 end
