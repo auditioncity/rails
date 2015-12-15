@@ -3,6 +3,7 @@ class ActorsController < ApplicationController
   before_action :authenticate_user!
 
   def create
+    @user = current_user
     if params[:info]
       headshot = params[:headshot] unless params[:headshot] == "undefined"
       resume = params[:resume] unless params[:resume] == "undefined"
@@ -48,6 +49,7 @@ class ActorsController < ApplicationController
   end
 
   def update
+    @user = current_user
     if params[:info]
       headshot = params[:headshot] unless params[:headshot] == "undefined"
       resume = params[:resume] unless params[:resume] == "undefined"
@@ -80,6 +82,7 @@ class ActorsController < ApplicationController
 
   def show
     @actor = Actor.find(params[:id])
+    @user = current_user
     if @actor
       render "show.json.jbuilder", status: :ok
     else
