@@ -3,14 +3,13 @@ class ActorsController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    user = current_user
     if params[:info]
       headshot = params[:headshot] unless params[:headshot] == "undefined"
       resume = params[:resume] unless params[:resume] == "undefined"
       @info = JSON.parse(params[:info])
       @info.symbolize_keys!
-      user.update(full_name: @info[:full_name]) if @info[:full_name]
-      @actor = user.actors.new(
+      current_user.update(full_name: @info[:full_name]) if @info[:full_name]
+      @actor = current_user.actors.new(
           bio: @info[:bio],
           age_young: @info[:age_young],
           age_old: @info[:age_old],
@@ -92,7 +91,8 @@ class ActorsController < ApplicationController
   def index
     #@actor = Actor.all
     #@actor = Actor.find_by(eye_color: params[:eye_color], hair_color: params[:hair_color])
-    @actor = find_actors(params)
+    @user = current_user
+    @actor = find_actors
     if @actor
       render "index.json.jbuilder"
     else
@@ -284,7 +284,7 @@ class ActorsController < ApplicationController
 
   private
 
-  def find_actors(params)
+  def find_actors
     actors = Actor.all
     actors = actors.where(hair_color: params[:hair_color]) if params[:hair_color]
     actors = actors.where(eye_color: params[:eye_color]) if params[:eye_color]

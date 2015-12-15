@@ -39,4 +39,10 @@ json.actor do
     json.type url.label
     json.url url.info
   end
+  #binding.pry
+  if @user.director
+    decision = @user.director.decisions.find_by_actor_id(actor.id)
+    json.decision_notes decision.notes if decision
+    json.decision_callback decision.callback if decision
+  end
 end
