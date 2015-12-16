@@ -16,4 +16,3 @@ The mission of Audition City is to facilitate the actor-director relationship in
 
 - Facilitate a community-wide "Unified" audition process
 - Directors can post audition opportunities
-- 
